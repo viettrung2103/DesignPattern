@@ -3,8 +3,9 @@ package org.example.Components.textfield;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.example.Components.AbstractControl;
 
-public abstract class AbstractTextField {
+public abstract class AbstractTextField implements AbstractControl {
     private HBox hBox;
     private String text;
     private TextField textField;
@@ -35,6 +36,11 @@ public abstract class AbstractTextField {
 
     public void setTextField(TextField textField) {
         this.textField = textField;
+    }
+
+    @Override
+    public void setMyText(String text){
+        this.textField.setText(text);
     }
 
     public abstract void display();

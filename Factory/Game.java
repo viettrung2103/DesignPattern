@@ -8,8 +8,8 @@ public class Game {
         System.out.println("Hello World");
 
         Game game = new Game(MapType.CITY);
-        System.out.println("new map");
-        Game game2 = new Game(MapType.WILDERNESS,5,7);
+//        System.out.println("new map");
+//        Game game2 = new Game(MapType.WILDERNESS,5,7);
 
     }
 

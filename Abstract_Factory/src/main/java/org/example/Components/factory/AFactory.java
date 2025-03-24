@@ -16,16 +16,22 @@ public class AFactory extends UIFactory {
 
     @Override
     public AbstractButton createButton() {
-        return  new ButtonA(super.gethBox(), super.getText());
+        AbstractButton button = new ButtonA(super.gethBox(), super.getText());
+        super.addControl(button);
+        return  button;
     }
 
     @Override
     public AbstractTextField createTextField() {
-        return new TextFieldA(super.gethBox(),super.getText());
+        AbstractTextField textField = new TextFieldA(super.gethBox(), super.getText());
+        super.addControl(textField);
+        return textField;
     }
 
     @Override
     public AbstractCheckbox createCheckBox() {
-        return new CheckBoxA(super.gethBox(), super.getText());
+        AbstractCheckbox checkbox = new CheckBoxA(super.gethBox(), super.getText());
+        super.addControl(checkbox);
+        return checkbox;
     }
 }

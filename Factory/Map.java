@@ -35,7 +35,7 @@ public abstract class Map {
     public void display(){
         for (List<Tile>row: tileMap){
             for (Tile tile:row){
-                System.out.print(tile.getCharacter());
+                System.out.print(tile.getCharacter()+" ");
             }
             System.out.println();
         }

@@ -2,9 +2,9 @@ package org.example.Components.button;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import org.example.Components.AbstractControl;
 
-public abstract class AbstractButton {
+public abstract class AbstractButton  implements AbstractControl {
 
      private HBox hBox;
      private String text;
@@ -32,6 +32,11 @@ public abstract class AbstractButton {
      }
 
      public void setText(String text){
+          this.button.setText(text);
+     }
+
+     @Override
+     public void setMyText(String text){
           this.button.setText(text);
      }
 

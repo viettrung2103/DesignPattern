@@ -2,9 +2,10 @@ package org.example.Components.checkbox;
 
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.HBox;
+import org.example.Components.AbstractControl;
 import org.example.Components.button.AbstractButton;
 
-public abstract class AbstractCheckbox {
+public abstract class AbstractCheckbox implements AbstractControl {
     private HBox hBox;
     private String text;
     private CheckBox checkbox;
@@ -38,9 +39,9 @@ public abstract class AbstractCheckbox {
         this.checkbox = checkBox;
     }
 
-//    public void set(CheckBox checkBox){
-//        this.checkbox = checkBox;
-//    }
+    public void setMyText(String text){
+        this.checkbox.setText(text);
+    }
 
     public abstract void display();
 //    public abstract void setText(String text);
