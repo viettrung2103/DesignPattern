@@ -1,0 +1,3 @@
+[submodule "Observable/material/design_patterns"]
+	path = Observable/material/design_patterns
+	url = git@github.com:vesavvo/design_patterns.git
