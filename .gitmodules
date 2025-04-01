@@ -1,3 +1,6 @@
 [submodule "Observable/material/design_patterns"]
 	path = Observable/material/design_patterns
 	url = git@github.com:vesavvo/design_patterns.git
+[submodule "materials/design-patterns"]
+	path = materials/design-patterns
+	url = https://github.com/vesavvo/design_patterns.git
