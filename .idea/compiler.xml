@@ -9,6 +9,7 @@
         <module name="Composite" />
         <module name="Abstract_Factory" />
         <module name="Singleton" />
+        <module name="State" />
       </profile>
     </annotationProcessing>
   </component>
