@@ -53,16 +53,16 @@ public class Gui extends Application {
         hBox.setMargin(colorBox3.getRectangle(), insets);
 
 
-        Label label = new Label("Press Ctrl-Z to undo the last change.");
-        label.setPadding(insets);
+        Label undoLabel = new Label("Press Ctrl-Z to undo the last change.");
+        Label redoLabel = new Label ("Press Ctrl-Y to redo the last change.");
+        undoLabel.setPadding(insets);
+        redoLabel.setPadding(insets);
 
         // create a listView
         // list view require a observable list, so a list from controller need to be converted
         // to the observable list which will be passed to the listview
         List<IMemento> mementoList = controller.getHistory();
-        Model newModel = new Model();
-        IMemento Newmemento = newModel.createMemento();
-        mementoList.add(Newmemento);
+
         historyList  = FXCollections.observableArrayList(mementoList);
         historyUIList = new ListView<>(historyList);
 
@@ -85,7 +85,7 @@ public class Gui extends Application {
         historyUIList.setPrefHeight(200);
 
         // create a VBox that contains the HBox and the CheckBox
-        VBox vBox = new VBox(hBox, checkBox, label, historyUIList);
+        VBox vBox = new VBox(hBox, checkBox, undoLabel, redoLabel, historyUIList);
         // call controller when the CheckBox is clicked
         checkBox.setOnAction(event -> {
 
@@ -95,13 +95,24 @@ public class Gui extends Application {
 
         // Set the HBox to be the root of the Scene
         Scene scene = new Scene(vBox);
+        // for undo action
         scene.setOnKeyPressed(event -> {
-            if (event.isControlDown() && event.getCode() == KeyCode.Z) {
-                // Ctrl-Z: undo
-                System.out.println("Undo key combination pressed");
-                controller.undo();
+            if (event.isControlDown()) {
+                if (event.getCode() == KeyCode.Z) {
+                    // Ctrl-Z: undo
+                    System.out.println("Undo key combination pressed");
+                    controller.undo();
+
+                }
+                // ctrl -y = redo
+                if (event.getCode() == KeyCode.Y) {
+                    System.out.println("Redo key combination pressed");
+                    controller.redo();
+                }
             }
         });
+
+
 
 
         stage.setScene(scene);
