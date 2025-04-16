@@ -13,7 +13,6 @@ public class CityMap extends Map {
         int randNum = Utils.getRandomNum();
         switch (randNum) {
             case 0:
-                ;
                 return new SwampTile();
             case 1:
                 return new ForestTile();
