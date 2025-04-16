@@ -17,8 +17,8 @@ public class Controller {
     }
 
     public void setOption(int optionNumber, int choice) {
-        saveToHistory();
         this.redoHistory.clear();
+        saveToHistory();
         model.setOption(optionNumber, choice);
     }
 
@@ -27,8 +27,8 @@ public class Controller {
     }
 
     public void setIsSelected(boolean isSelected) {
-        saveToHistory();
         this.redoHistory.clear();
+        saveToHistory();
         model.setIsSelected(isSelected);
     }
 
@@ -75,7 +75,7 @@ public class Controller {
     private void saveToRedoHistory() {
         IMemento currentState = model.createMemento();
         redoHistory.add(currentState);
-//        gui.updateHistoryList();
+        gui.updateHistoryList();
     }
 
 

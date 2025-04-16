@@ -56,8 +56,10 @@ public class Gui extends Application {
 
         Label undoLabel = new Label("Press Ctrl-Z to undo the last change.");
         Label redoLabel = new Label ("Press Ctrl-Y to redo the last change.");
+        Label tableLabel = new Label ("History :");
         undoLabel.setPadding(insets);
         redoLabel.setPadding(insets);
+        tableLabel.setPadding(insets);
 
         // create a listView
         // list view require a observable list, so a list from controller need to be converted
@@ -87,7 +89,7 @@ public class Gui extends Application {
         historyUIList.setPrefHeight(200);
 
         // create a VBox that contains the HBox and the CheckBox
-        VBox vBox = new VBox(hBox, checkBox, undoLabel, redoLabel, historyUIList);
+        VBox vBox = new VBox(hBox, checkBox, undoLabel, redoLabel,tableLabel, historyUIList);
         // call controller when the CheckBox is clicked
         checkBox.setOnAction(event -> {
 
