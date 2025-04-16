@@ -1,14 +1,20 @@
 package org.example;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Memento implements IMemento {
     private int[] options;
     private boolean isSelected;
     private String name; // use this to display in list
+    private String creationTime;
 
     public Memento(int[] options, boolean isSelected) {
         this.options = options.clone(); // Copy options array
         this.isSelected = isSelected;
-        this.name = "options: "+options[0] + " "+ options[1] + " "+ options[2]  + " - " + isSelected;
+        this.creationTime = getDate(System.currentTimeMillis());
+        this.name = "options: "+options[0] + " "+ options[1] + " "+ options[2]  + " - " + isSelected +" - "+creationTime;
+
 //        System.out.println("Memento created");
     }
 
@@ -26,5 +32,13 @@ public class Memento implements IMemento {
 
     public String setName(String name) {
         return this.name = name;
+    }
+
+    private String getDate(long dateFromLongNum){
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+        Date dateD=new Date();
+        dateD.setTime(dateFromLongNum);
+        return dateFormat.format(dateD);
+//        return date
     }
 }

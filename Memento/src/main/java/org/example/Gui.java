@@ -14,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Gui extends Application {
@@ -25,7 +26,7 @@ public class Gui extends Application {
     private ColorBox colorBox3;
     private CheckBox checkBox;
 
-    ObservableList<IMemento> historyList;
+    ObservableList<IMemento> finalHistoryList;
     ListView<IMemento> historyUIList;
 
     public void start(Stage stage) {
@@ -62,11 +63,12 @@ public class Gui extends Application {
         // list view require a observable list, so a list from controller need to be converted
         // to the observable list which will be passed to the listview
         List<IMemento> mementoList = controller.getHistory();
+        List<IMemento> redoMementoList = controller.getRedoHistory();
 
-        historyList  = FXCollections.observableArrayList(mementoList);
-        historyUIList = new ListView<>(historyList);
+        finalHistoryList  = FXCollections.observableArrayList(this.combinedHistoryListAndRedoHistoryList(mementoList, redoMementoList));
+        historyUIList = new ListView<>(finalHistoryList);
 
-//        historyUIList.setItems(historyList);
+//        historyUIList.setItems(finalHistoryList);
 
         // SET UP THE HOW THE CELL IN THE LISTVIEW WILL DISPLAY THE ITEM
         historyUIList.setCellFactory(memento -> new ListCell<IMemento>(){
@@ -129,7 +131,20 @@ public class Gui extends Application {
     }
 
     public void updateHistoryList(){
-        this.historyList.setAll(controller.getHistory());
+        List<IMemento> historyList = controller.getHistory();
+        List<IMemento> redoHistoryList = controller.getRedoHistory();
+        this.finalHistoryList.setAll(combinedHistoryListAndRedoHistoryList(historyList, redoHistoryList));
+    }
+
+    public List<IMemento> combinedHistoryListAndRedoHistoryList(List<IMemento> historyList, List<IMemento> redoMementoList) {
+        List<IMemento> newHistoryList = new ArrayList<>();
+        for (IMemento iMemento : historyList) {
+            newHistoryList.add(iMemento);
+        }
+        for (IMemento iMemento : redoMementoList) {
+            newHistoryList.add(iMemento);
+        }
+        return newHistoryList;
     }
 
 
