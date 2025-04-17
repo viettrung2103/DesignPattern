@@ -41,4 +41,18 @@ public class Memento implements IMemento {
         return dateFormat.format(dateD);
 //        return date
     }
+
+    public String getCreationTime() {
+        return creationTime;
+    }
+
+    public boolean isSameMemento(IMemento memento) {
+        if (memento==null){
+            return false;
+        }
+        if (((Memento)memento).getCreationTime().equals(this.creationTime)){
+            return true;
+        }
+        return false;
+    }
 }

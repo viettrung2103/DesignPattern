@@ -1,6 +1,9 @@
 package org.example;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -26,8 +29,9 @@ public class Gui extends Application {
     private ColorBox colorBox3;
     private CheckBox checkBox;
 
-    ObservableList<IMemento> finalHistoryList;
-    ListView<IMemento> historyUIList;
+    private ObservableList<IMemento> finalHistoryList;
+    private ListView<IMemento> historyUIList;
+    private ChangeListener<IMemento> selectedHistoryListener;
 
     public void start(Stage stage) {
 
@@ -85,6 +89,31 @@ public class Gui extends Application {
             }
         });
 
+        selectedHistoryListener = (observable, oldImemento, newImemento) -> {
+            // Your action here
+            System.out.println("Selected item: " + newImemento);
+            // new Value is the selected item
+//                selectedHistory = newValue;
+            controller.selectHistory(newImemento);
+        };
+
+        historyUIList.getSelectionModel().selectedItemProperty().addListener(selectedHistoryListener);
+//        historyUIList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<IMemento>() {
+//
+//            @Override
+//            public void changed(ObservableValue<? extends IMemento> observable, IMemento oldValue, IMemento newValue) {
+//                // Your action here
+//                System.out.println("Selected item: " + newValue);
+//                // new Value is the selected item
+////                selectedHistory = newValue;
+//                controller.selectHistory(newValue);
+//
+//
+//            }
+//        });
+
+
+
         historyUIList.setPrefWidth(100);
         historyUIList.setPrefHeight(200);
 
@@ -115,10 +144,6 @@ public class Gui extends Application {
                 }
             }
         });
-
-
-
-
         stage.setScene(scene);
         stage.setTitle("Memento Pattern Example");
         stage.show();
@@ -135,7 +160,21 @@ public class Gui extends Application {
     public void updateHistoryList(){
         List<IMemento> historyList = controller.getHistory();
         List<IMemento> redoHistoryList = controller.getRedoHistory();
+        // remove the selected history, as it will be remove in the db
+
+        // using the platform run later so we make sure the list is fully retrieved before handle by GUI
+        Platform.runLater(() -> {
+
+            // since there is updating inside the listview while listview is affected by the listener, so listening is not connected to the correct selected row
+        historyUIList.getSelectionModel().selectedItemProperty().removeListener(selectedHistoryListener);
+//        // clear selected row so there is no out of bound
+        historyUIList.getSelectionModel().clearSelection();
+//        this.finalHistoryList.setAl
+
         this.finalHistoryList.setAll(combinedHistoryListAndRedoHistoryList(historyList, redoHistoryList));
+        // re-add to reactive the selected listern
+        historyUIList.getSelectionModel().selectedItemProperty().addListener(selectedHistoryListener);
+        });
     }
 
     public List<IMemento> combinedHistoryListAndRedoHistoryList(List<IMemento> historyList, List<IMemento> redoMementoList) {

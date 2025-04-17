@@ -64,6 +64,20 @@ public class Controller {
         }
     }
 
+    public void selectHistory(IMemento memento) {
+        // save the current state to history
+        IMemento currentState = model.createMemento();
+        history.add(currentState);
+        // restore state to the selected state in history
+        model.restoreState(memento);
+        // remove the history from the history
+        removeSelectedHistoryState(memento);
+        //update gui
+        gui.updateGui();
+        gui.updateHistoryList();
+
+    }
+
     private void saveToHistory() {
         IMemento currentState = model.createMemento();
 //        System.out.println(currentState);
@@ -86,5 +100,20 @@ public class Controller {
 
     public List<IMemento> getRedoHistory() {
         return redoHistory;
+    }
+
+    private void removeSelectedHistoryState(IMemento memento){
+        for(IMemento m : history){
+            if(((Memento)m).equals(memento)){
+                history.remove(m);
+                return;
+            }
+        }
+        for(IMemento m : redoHistory){
+            if(((Memento)m).equals(memento)){
+                redoHistory.remove(m);
+                return;
+            }
+        }
     }
 }
