@@ -13,6 +13,7 @@
         <module name="Abstract_Factory" />
         <module name="Singleton" />
         <module name="State" />
+        <module name="Builder" />
       </profile>
     </annotationProcessing>
   </component>
