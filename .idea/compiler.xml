@@ -14,6 +14,7 @@
         <module name="Singleton" />
         <module name="State" />
         <module name="Builder" />
+        <module name="Adapter" />
       </profile>
     </annotationProcessing>
   </component>
