@@ -6,17 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Memento" />
-        <module name="Proxy" />
-        <module name="Flyweight" />
         <module name="Prototype" />
         <module name="Composite" />
         <module name="Visitor" />
         <module name="Abstract_Factory" />
-        <module name="Singleton" />
-        <module name="State" />
         <module name="Builder" />
         <module name="Adapter" />
+        <module name="Memento" />
+        <module name="Proxy" />
+        <module name="Flyweight" />
+        <module name="Singleton" />
+        <module name="State" />
+        <module name="Iterator" />
         <module name="Bridge" />
       </profile>
     </annotationProcessing>
