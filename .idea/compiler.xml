@@ -9,6 +9,7 @@
         <module name="Memento" />
         <module name="Proxy" />
         <module name="Flyweight" />
+        <module name="Prototype" />
         <module name="Composite" />
         <module name="Visitor" />
         <module name="Abstract_Factory" />
