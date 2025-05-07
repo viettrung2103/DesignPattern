@@ -19,6 +19,7 @@
         <module name="Singleton" />
         <module name="State" />
         <module name="Iterator" />
+        <module name="Mediator" />
         <module name="Bridge" />
       </profile>
     </annotationProcessing>
